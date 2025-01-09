@@ -154,7 +154,22 @@ INSERT INTO MonthlyDataSheet (S_No,P_ID, P_Name, Days, Sleep, Defecation, ColdCo
 (29,9, 'Harish', '2024-12-01', 'Good Sleep', 'Normal', 'Cough', 'Good', 'Normal', 'Nil', 'Good', 'Good', 'Null'),
 (30,10, 'Thenmozhi', '2024-12-01', 'Disturbed', 'Normal', 'Normal', 'Good', 'Good', 'High', 'Good','Good', 'Too much of laughing');
 Select*From monthlydatasheet;
-
-
-
+DELIMITER !!
+ CREATE PROCEDURE Patient_Phone(IN phone varchar(12))
+ BEGIN
+	SELECT P_Name,DOB,Phone_no
+	FROM Patients
+	Where Phone_no=phone;
+ END;
+ !! DELIMITER ;
+ 
+  DELIMITER !!
+ CREATE PROCEDURE Medical_Condition()
+ BEGIN
+	SELECT P.P_Name, P.DOB, P.Phone_no, P.Email, M.Medical_Condition
+FROM Patients AS P
+INNER JOIN MedicalHistory AS M ON P.P_ID = M.P_ID
+WHERE M.Medical_Condition = 'Multiple sclerosis';
+End;
+!! DELIMITER ;
 
